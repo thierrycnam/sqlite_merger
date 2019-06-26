@@ -152,13 +152,13 @@ def get_argument_parser():
 
     # Create the parser for the "parse" command
     parser.add_argument('-i', '--infiles', required=True, nargs="+",
-        help='Input files will be merged with output file.')
+        help='Input SQLite files to merge into a single database.')
     parser.add_argument('-o', '--outfile', required=True, default=None,
-        help='Output file. If provided input file 1 and input file 2 will be '
-        ' merged in this file. Both inputs remain unchanged.')
+        help='Output file.')
     parser.add_argument('-t', '--tables', required=False,
         default=None, nargs='*',
-        help="Tables to copy. if not provided all the tables will be copied")
+        help='List of tables to copy. If not provided all the tables will '
+        'be copied')
     parser.set_defaults(func=parser_handler)
     return parser
 
