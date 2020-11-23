@@ -101,19 +101,17 @@ def merge_databases(tables, infiles, outfile=None):
     """
     if tables:
         list_tables = tables
-    else:
-        list_tables = get_list_tables(infiles[0])
-
     if not outfile:
         print("NO OUTFILE GIVEN", file=sys.stderr)
         sys.exit(2)
     else:
         print("output file : {}".format(outfile), file=sys.stderr)
-    print(list_tables, file=sys.stderr)
-    if len(list_tables) ==  0:
-        print("No tables detected. Empty db", file=sys.stderr)
-        sys.exit(2)
     for infile in infiles:
+        if not tables:
+            list_tables = get_list_tables(infile)
+        if len(list_tables) ==  0:
+            print("No tables detected. Empty db", file=sys.stderr)
+            sys.exit(2)
         copy_db(infile, outfile, list_tables)
 
 def parser_handler(args):
